@@ -102,4 +102,17 @@ class UserController extends Controller
             return response()->json(['message' => $e->getMessage()]);
         }
     }
+
+
+    /**
+     * | Delete Users
+     */
+
+    public function destroy(Request $req)
+    {
+        $items = json_decode(File::get($this->jsonFilePath), true);
+        unset($items[$req->indexdel]);
+        File::put($this->jsonFilePath, json_encode(array_values($items)));
+        return response()->json(['message' => "data Deleted Successfully"]);
+    }
 }

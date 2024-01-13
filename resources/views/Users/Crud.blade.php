@@ -473,10 +473,35 @@
             });
         });
 
+        // Delete Items
+        delForm.submit(function(e) {
+            e.preventDefault();
+            const formData = new FormData(delForm[0]);
+
+            $.ajax({
+                url: '/del-users',
+                method: 'POST',
+                processData: false,
+                contentType: false,
+                data: formData,
+                success: function(results) {
+                    addForm[0].reset();
+                    displayUsers();
+                    alert(results.message);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+
     });
 
 
 
+    /**
+     * | Display The Users on the datatable
+     */
     function displayUsers() {
         var murl = "/get-users";
         $.ajax({
@@ -499,6 +524,9 @@
     }
 
 
+    /**
+     * | Fetch all the data on datatable
+     */
     function fetchDataOnDataTable(results) {
         $("#datatable").DataTable().destroy();
         $("#datatable").DataTable({
@@ -564,6 +592,9 @@
     })
 
 
+    /**
+     * | Delete Employee Modal  Preview Setup
+     */
     $('#deleteEmployeeModal').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
         var index = button.data('index')
@@ -572,6 +603,9 @@
     })
 
 
+    /**
+     * | download the image
+     */
     function downloadImage() {
         // Get the image element by its ID
         var imageElement = document.getElementById('myImage');
