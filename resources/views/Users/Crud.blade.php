@@ -451,6 +451,28 @@
             });
         });
 
+        // Edit Items
+        editForm.submit(function(e) {
+            e.preventDefault();
+            const formData = new FormData(editForm[0]);
+
+            $.ajax({
+                url: '/edit-users',
+                method: 'POST',
+                processData: false,
+                contentType: false,
+                data: formData,
+                success: function(results) {
+                    addForm[0].reset();
+                    displayUsers();
+                    alert(results.message);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+
     });
 
 

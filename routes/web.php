@@ -21,3 +21,4 @@ Route::get('/', function () {
 Route::get('/users', [UserController::class, 'index']);
 Route::post('/users', [UserController::class, 'store']);
 Route::get('/get-users', [UserController::class, 'getUsers']);
+Route::post('/edit-users', [UserController::class, 'update']);
